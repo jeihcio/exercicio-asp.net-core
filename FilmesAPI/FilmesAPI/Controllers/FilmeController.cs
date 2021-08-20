@@ -24,5 +24,18 @@ namespace FilmesAPI
         {
             return filmes;
         }
+
+        [HttpGet("{id}")]
+        public Filme RecuperarFilmePorId(int id)
+        {
+            foreach (Filme filme in filmes)
+            {
+                if (filme.Id == id)
+                {
+                    return filme;
+                }
+            }
+            return null;
+        }
     }
 }
