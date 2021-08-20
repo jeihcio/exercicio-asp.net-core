@@ -1,7 +1,7 @@
 ﻿using FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FilmesAPI
 {
@@ -9,7 +9,7 @@ namespace FilmesAPI
     [Route("[controller]")]
     public class FilmeController : ControllerBase
     {
-        private static List<Filme> filmes = new();
+        private static readonly List<Filme> filmes = new();
         private static int id = 1;
 
         [HttpPost]
@@ -28,14 +28,7 @@ namespace FilmesAPI
         [HttpGet("{id}")]
         public Filme RecuperarFilmePorId(int id)
         {
-            foreach (Filme filme in filmes)
-            {
-                if (filme.Id == id)
-                {
-                    return filme;
-                }
-            }
-            return null;
+            return filmes.FirstOrDefault(x => x.Id == id);
         }
     }
 }
